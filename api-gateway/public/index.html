@@ -1,0 +1,119 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#111827">
+  <title>Acceso | Microservices</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/styles.css">
+  <script src="/app.js" defer></script>
+</head>
+<body>
+  <main class="shell">
+    <section class="visual-panel" aria-label="Presentación">
+      <div class="brand"><span class="brand-mark">M</span><span>micro<span class="brand-light">space</span></span></div>
+      <div class="visual-copy">
+        <span class="eyebrow"><span class="pulse"></span> PLATAFORMA CONECTADA</span>
+        <h1>Todo empieza<br>con un <em>acceso.</em></h1>
+        <p>Una experiencia sencilla para entrar a tu espacio de trabajo y mantener tu información a mano.</p>
+      </div>
+      <div class="visual-footer"><span class="orbit orbit-one"></span><span class="orbit orbit-two"></span><span class="orbit orbit-three"></span><span class="footer-label">SISTEMA DE ACCESO · V 1.0</span></div>
+    </section>
+
+    <section class="form-panel">
+      <div class="mobile-brand"><span class="brand-mark">M</span><span>micro<span class="brand-light">space</span></span></div>
+      <div class="form-wrap">
+        <div id="auth-view">
+          <div class="form-heading">
+            <span class="step-label" id="step-label">BIENVENIDO DE NUEVO</span>
+            <h2 id="form-title">Inicia sesión</h2>
+            <p id="form-subtitle">Introduce tus datos para acceder a tu cuenta.</p>
+          </div>
+          <div class="tabs" role="tablist" aria-label="Tipo de acceso">
+            <button class="tab active" id="login-tab" type="button" role="tab" aria-selected="true">Iniciar sesión</button>
+            <button class="tab" id="register-tab" type="button" role="tab" aria-selected="false">Crear cuenta</button>
+          </div>
+          <form id="auth-form" novalidate>
+            <div class="field" id="name-field" hidden>
+              <label for="name">Nombre completo</label>
+              <input id="name" name="name" type="text" autocomplete="name" placeholder="Ej. Ana Martínez" minlength="2">
+              <small class="field-error" id="name-error"></small>
+            </div>
+            <div class="field">
+              <label for="email">Correo electrónico</label>
+              <input id="email" name="email" type="email" autocomplete="email" placeholder="tu@correo.com" required>
+              <small class="field-error" id="email-error"></small>
+            </div>
+            <div class="field">
+              <div class="label-row"><label for="password">Contraseña</label><span class="hint">Mínimo 8 caracteres</span></div>
+              <div class="password-wrap">
+                <input id="password" name="password" type="password" autocomplete="current-password" placeholder="••••••••" minlength="8" required>
+                <button id="toggle-password" class="show-password" type="button" aria-label="Mostrar contraseña">Ver</button>
+              </div>
+              <small class="field-error" id="password-error"></small>
+            </div>
+            <div class="notice" id="notice" role="status" aria-live="polite" hidden></div>
+            <button class="submit-button" id="submit-button" type="submit"><span id="submit-label">Entrar a mi cuenta</span><span aria-hidden="true">↗</span></button>
+          </form>
+          <p class="switch-copy" id="switch-copy">¿Todavía no tienes cuenta? <button type="button" id="switch-link">Regístrate gratis</button></p>
+        </div>
+
+        <div id="profile-view" hidden>
+          <div class="profile-icon">✓</div>
+          <span class="step-label">ACCESO CONFIRMADO</span>
+          <h2>¡Qué bueno verte!</h2>
+          <p class="profile-intro">Has iniciado sesión correctamente.</p>
+          <div class="profile-card">
+            <div class="avatar" id="avatar">U</div>
+            <div><strong id="profile-name">Usuario</strong><span id="profile-email">usuario@correo.com</span></div>
+            <span class="status-dot" title="Sesión activa"></span>
+          </div>
+          <div class="profile-meta"><span>Estado de sesión</span><strong>Activa</strong></div>
+          <div class="profile-meta"><span>Autenticación</span><strong>JWT Bearer</strong></div>
+
+          <section class="crud-panel" aria-labelledby="crud-title">
+            <div class="crud-heading">
+              <div>
+                <span class="step-label">GESTIÓN DE DATOS</span>
+                <h3 id="crud-title">CRUD de usuarios</h3>
+              </div>
+              <span class="crud-count" id="crud-count">0 registros</span>
+            </div>
+            <p class="crud-description">Crea, consulta, edita o elimina registros de ejemplo.</p>
+            <form id="crud-form" class="crud-form">
+              <input id="crud-id" type="hidden">
+              <div class="field">
+                <label for="crud-name">Nombre</label>
+                <input id="crud-name" type="text" placeholder="Nombre completo" minlength="2" maxlength="100" required>
+              </div>
+              <div class="field">
+                <label for="crud-email">Correo electrónico</label>
+                <input id="crud-email" type="email" placeholder="usuario@correo.com" maxlength="254" required>
+              </div>
+              <div class="crud-form-actions">
+                <button class="submit-button" id="crud-submit" type="submit">Agregar usuario <span>＋</span></button>
+                <button class="crud-cancel" id="crud-cancel" type="button" hidden>Cancelar edición</button>
+              </div>
+            </form>
+            <div class="notice" id="crud-notice" role="status" aria-live="polite" hidden></div>
+            <div id="crud-loading" class="crud-empty">Cargando usuarios…</div>
+            <div class="crud-list-wrap">
+              <table class="crud-table">
+                <thead><tr><th>Usuario</th><th>Correo</th><th>Acciones</th></tr></thead>
+                <tbody id="crud-list"></tbody>
+              </table>
+            </div>
+            <p id="crud-empty" class="crud-empty" hidden>No hay registros todavía. Agrega el primero.</p>
+          </section>
+
+          <button class="submit-button logout-button" id="logout-button" type="button">Cerrar sesión <span>↗</span></button>
+        </div>
+      </div>
+      <footer class="form-footer"><span>© 2026 Microspace</span><span><i></i> Protegido por autenticación</span></footer>
+    </section>
+  </main>
+</body>
+</html>
